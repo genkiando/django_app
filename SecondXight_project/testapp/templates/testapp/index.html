@@ -7,7 +7,11 @@
 </head>
 <body>
 {% if test_text %}
+
 <p>{{test_text}}</p>
+
+    {{df}}
+
 
 {% else %}
     <form method="post" enctype="multipart/form-data">
@@ -15,6 +19,7 @@
         {{ form.as_p }} 
 
         <button type="submit">Upload</button>
+        <p>{{prace}}</p>
 
  {% endif %}
 
