@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     # path('<int:result_id>/', views.result, name='result'),
     path('upload', views.model_form_upload, name='upload'),
+    path('edit', views.edit, name='edit'),
 
 
 

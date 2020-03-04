@@ -9,8 +9,57 @@
 {% if test_text %}
 
 <p>{{test_text}}</p>
+<p>{{file_obj}}</p>
 
-    {{df}}
+{% for y in li%}
+    <p>{{y|safe}}</p> <!--dfはDataFrameをto_html()で変換したもの-->
+{% endfor %}
+
+
+<!-- mydictは、{1:データ,カラム,2:データ,カラム,3:データカラム……}という構造
+tableの外のfor文は辞書のインデックスを順に繰り返す1→2→3
+y.1はカラム、y.0はデータを示している
+y.1.0はカラムデータの最初のデータ（リスト化するときに多次元になっている）
+y.0.0も同様 -->
+
+<!-- {%for x, y in my_dict.items%}
+<table border="1">
+        <tr>
+            {% for a in y.1.0%}
+            <th>
+                {{a}}
+            </th>
+            {% endfor %}
+        </tr> 
+        {%for z in y.0.0%}
+        <tr>
+            {% for b in z%}
+            <th>{{b}}</th>
+            {% endfor %}
+        </tr>
+        {%endfor%}
+</table>
+<div>　</div>
+{% endfor %} -->
+    
+<!-- csvファイルをhtml上で表にするには、csvをto_html()で変換したのちに{{df|safe}}で表示するか
+多次元配列に変換してhtmlに投げる→for文でtableを作成する -->
+
+
+<!-- どういった編集を行うのか、プルダウンで選択する -->
+<form action="{% url 'edit'%}" method="post">
+    {% csrf_token %}
+    <p>
+    <select name="example1">
+    <option value="innerjoin">Inner Join</option>
+    <option value="outerjoin_r">Outer Join/Right</option>
+    <option value="outerjoin_l">Outer Join/Left</option>
+    </select>
+    </p>
+    <p><input type="submit" value="編集する"></p>
+</form>
+
+
 
 
 {% else %}
@@ -22,6 +71,7 @@
         <p>{{prace}}</p>
 
  {% endif %}
+
 
 
 
